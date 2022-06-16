@@ -239,8 +239,7 @@ namespace Stryker.DataCollector
         private void PublishCoverageData(DataCollectionContext dataCollectionContext)
         {
             var covered = RetrieveCoverData();
-            var testCoverageInfo = new TestCoverageInfo(_currentTestCase,
-                _previousTest,
+            var testCoverageInfo = new TestCoverageInfo(
                 covered[0],
                 covered[1],
                 _mutationCoveredOutsideTests);
@@ -281,8 +280,7 @@ namespace Stryker.DataCollector
             CaptureCoverageOutsideTests();
             if ((_mutationCoveredOutsideTests?.Count ?? 0) > 0)
             {
-                _testsToMutantCoverage.Add(new TestCoverageInfo(null,
-                    _currentTestCase,
+                _testsToMutantCoverage.Add(new TestCoverageInfo(
                     null,
                     null,
                     _mutationCoveredOutsideTests));
@@ -291,18 +289,13 @@ namespace Stryker.DataCollector
 
         private readonly struct TestCoverageInfo
         {
-            public const int JSonSizeEstimate = 100;
-            private readonly TestCase _test;
-            private readonly TestCase _previousTest;
             private readonly IList<int> _coveredMutations;
             private readonly IList<int> _coveredStaticMutations;
             private readonly IList<int> _leakedMutationsFromPreviousTest;
 
-            public TestCoverageInfo(TestCase test, TestCase previousTest, IList<int> coveredMutations,
+            public TestCoverageInfo(IList<int> coveredMutations,
                 IList<int> coveredStaticMutations, IList<int> leakedMutationsFromPreviousTest)
             {
-                _test = test;
-                _previousTest = previousTest;
                 _coveredMutations = coveredMutations;
                 _coveredStaticMutations = coveredStaticMutations;
                 _leakedMutationsFromPreviousTest = leakedMutationsFromPreviousTest;
